@@ -47,35 +47,38 @@ function App() {
 
   // --- Order Level Operations ---
   const addNewOrder = () => {
-    setOrders([
+    setOrders(prevOrders => [
       {
         id: generateId(),
         orderName: 'New Sale',
         cards: [{ id: generateId(), name: '', price: 0, qty: 0, isVisible: true, operator: 'add' }]
       },
-      ...orders
+      ...prevOrders
     ]);
   };
 
   const deleteOrder = (orderId) => {
-    if (orders.length === 1 && window.confirm("This will clear your only order. Are you sure?")) {
-       setOrders([{
-        id: generateId(),
-        orderName: 'New Sale',
-        cards: [{ id: generateId(), name: '', price: 0, qty: 0, isVisible: true, operator: 'add' }]
-      }]);
-    } else if (orders.length > 1) {
-      setOrders(orders.filter(o => o.id !== orderId));
-    }
+    setOrders(prevOrders => {
+      if (prevOrders.length === 1 && window.confirm("This will clear your only order. Are you sure?")) {
+         return [{
+          id: generateId(),
+          orderName: 'New Sale',
+          cards: [{ id: generateId(), name: '', price: 0, qty: 0, isVisible: true, operator: 'add' }]
+        }];
+      } else if (prevOrders.length > 1) {
+        return prevOrders.filter(o => o.id !== orderId);
+      }
+      return prevOrders;
+    });
   };
 
   const updateOrderName = (orderId, newName) => {
-    setOrders(orders.map(o => o.id === orderId ? { ...o, orderName: newName } : o));
+    setOrders(prevOrders => prevOrders.map(o => o.id === orderId ? { ...o, orderName: newName } : o));
   };
 
   // --- Card Level Operations ---
   const updateCard = (orderId, cardId, field, value) => {
-    setOrders(orders.map(o => {
+    setOrders(prevOrders => prevOrders.map(o => {
       if (o.id !== orderId) return o;
       return {
         ...o,
@@ -85,7 +88,7 @@ function App() {
   };
 
   const addCardBelow = (orderId, cardId) => {
-    setOrders(orders.map(o => {
+    setOrders(prevOrders => prevOrders.map(o => {
       if (o.id !== orderId) return o;
       const index = o.cards.findIndex(c => c.id === cardId);
       const newCards = [...o.cards];
@@ -95,7 +98,7 @@ function App() {
   };
 
   const deleteCard = (orderId, cardId) => {
-    setOrders(orders.map(o => {
+    setOrders(prevOrders => prevOrders.map(o => {
       if (o.id !== orderId) return o;
       if (o.cards.length === 1) return o; // Prevent deleting the last card in an order
       return {
@@ -106,7 +109,7 @@ function App() {
   };
 
   const toggleVisibility = (orderId, cardId) => {
-    setOrders(orders.map(o => {
+    setOrders(prevOrders => prevOrders.map(o => {
       if (o.id !== orderId) return o;
       return {
         ...o,
@@ -116,7 +119,7 @@ function App() {
   };
 
   const toggleOperator = (orderId, cardId) => {
-    setOrders(orders.map(o => {
+    setOrders(prevOrders => prevOrders.map(o => {
       if (o.id !== orderId) return o;
       return {
         ...o,
