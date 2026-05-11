@@ -48,12 +48,12 @@ function App() {
   // --- Order Level Operations ---
   const addNewOrder = () => {
     setOrders(prevOrders => [
+      ...prevOrders,
       {
         id: generateId(),
         orderName: 'New Sale',
         cards: [{ id: generateId(), name: '', price: 0, qty: 0, isVisible: true, operator: 'add' }]
-      },
-      ...prevOrders
+      }
     ]);
   };
 

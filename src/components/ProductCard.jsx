@@ -74,41 +74,43 @@ const ProductCard = ({
         </div>
 
         {/* Inputs Area */}
-        <div className="flex-1 w-full grid grid-cols-2 sm:flex sm:flex-wrap items-end sm:items-center justify-between sm:justify-start gap-x-2 gap-y-4 sm:gap-4 order-2 sm:order-none">
+        <div className="flex-1 w-full flex items-end sm:items-center justify-between sm:justify-start gap-1 sm:gap-4 order-2 sm:order-none">
           
-          <div className="flex items-center gap-2 col-span-2 sm:col-span-1 justify-center sm:justify-start">
-            <div className="flex flex-col flex-1 sm:flex-none">
-              <label className="text-[11px] uppercase tracking-wider text-gray-500 mb-1 font-semibold">Price</label>
-              <input
-                type="number"
-                min="0"
-                value={card.price === 0 ? '' : card.price}
-                onChange={(e) => updateCard(card.id, 'price', parseFloat(e.target.value) || 0)}
-                placeholder="0.00"
-                className="w-full sm:w-24 px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-theme-accent bg-gray-50 text-center sm:text-left"
-              />
-            </div>
-            <span className="text-gray-400 font-bold mt-5 px-1">×</span>
-            <div className="flex flex-col flex-1 sm:flex-none">
-              <label className="text-[11px] uppercase tracking-wider text-gray-500 mb-1 font-semibold">Qty</label>
-              <input
-                type="number"
-                min="0"
-                value={card.qty === 0 ? '' : card.qty}
-                onChange={(e) => updateCard(card.id, 'qty', parseInt(e.target.value) || 0)}
-                placeholder="0"
-                className="w-full sm:w-20 px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-theme-accent bg-gray-50 text-center sm:text-left"
-              />
-            </div>
-            <span className="text-gray-400 font-bold mt-5 px-1 sm:block hidden">=</span>
+          <div className="flex flex-col flex-1 sm:flex-none">
+            <label className="text-[11px] uppercase tracking-wider text-gray-500 mb-1 font-semibold text-center sm:text-left">Price</label>
+            <input
+              type="number"
+              min="0"
+              value={card.price === 0 ? '' : card.price}
+              onChange={(e) => updateCard(card.id, 'price', parseFloat(e.target.value) || 0)}
+              placeholder="0"
+              className="w-full sm:w-24 px-1 sm:px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-theme-accent bg-gray-50 text-center sm:text-left text-sm sm:text-base"
+            />
           </div>
-
-          <div className="flex flex-col col-span-2 sm:col-span-1 w-full sm:w-auto mt-2 sm:mt-0">
-            <label className="text-[11px] uppercase tracking-wider text-gray-500 mb-1 font-semibold sm:text-left text-center">Subtotal</label>
-            <div className="text-sm font-bold text-gray-800 bg-gray-100 px-2 py-2 rounded-md border text-center sm:text-right w-full overflow-hidden text-ellipsis">
+          
+          <span className="text-gray-400 font-bold mb-2 px-0.5 text-sm sm:text-base">×</span>
+          
+          <div className="flex flex-col flex-1 sm:flex-none">
+            <label className="text-[11px] uppercase tracking-wider text-gray-500 mb-1 font-semibold text-center sm:text-left">Qty</label>
+            <input
+              type="number"
+              min="0"
+              value={card.qty === 0 ? '' : card.qty}
+              onChange={(e) => updateCard(card.id, 'qty', parseInt(e.target.value) || 0)}
+              placeholder="0"
+              className="w-full sm:w-20 px-1 sm:px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-theme-accent bg-gray-50 text-center sm:text-left text-sm sm:text-base"
+            />
+          </div>
+          
+          <span className="text-gray-400 font-bold mb-2 px-0.5 text-sm sm:text-base">=</span>
+          
+          <div className="flex flex-col flex-1 sm:flex-none overflow-hidden">
+            <label className="text-[11px] uppercase tracking-wider text-gray-500 mb-1 font-semibold text-center sm:text-left">Subtotal</label>
+            <div className="w-full text-sm sm:text-base font-bold text-gray-800 bg-gray-100 px-1 sm:px-2 py-2 rounded-md border text-center sm:text-right overflow-hidden text-ellipsis whitespace-nowrap">
               {subtotal.toLocaleString('en-IN', { style: 'currency', currency: 'INR' }).replace('₹', '₹ ')}
             </div>
           </div>
+
         </div>
 
         {/* Right Side Controls (Desktop Only) */}
