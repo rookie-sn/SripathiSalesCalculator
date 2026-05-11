@@ -106,7 +106,7 @@ const ProductCard = ({
           
           <div className="flex flex-col flex-1 sm:flex-none overflow-hidden">
             <label className="text-[11px] uppercase tracking-wider text-gray-500 mb-1 font-semibold text-center sm:text-left">Subtotal</label>
-            <div className="w-full text-sm sm:text-base font-bold text-gray-800 bg-gray-100 px-1 sm:px-2 py-2 rounded-md border text-center sm:text-right overflow-hidden text-ellipsis whitespace-nowrap">
+            <div className="w-full sm:w-24 text-sm sm:text-base font-bold text-gray-800 bg-gray-100 px-1 sm:px-2 py-2 rounded-md border text-center sm:text-right overflow-hidden text-ellipsis whitespace-nowrap">
               {subtotal.toLocaleString('en-IN', { style: 'currency', currency: 'INR' }).replace('₹', '₹ ')}
             </div>
           </div>
